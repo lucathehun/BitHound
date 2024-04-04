@@ -3,3 +3,4 @@ main.py
 connectivity_report.png
 uptime_*.log
 logs/
+__pycache__/
