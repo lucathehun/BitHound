@@ -1,2 +1,5 @@
 main.py
 .DS_Store
+connectivity_report.png
+uptime_*.log
+logs/
