@@ -69,7 +69,7 @@ def main(PING_RESULTS, TIMESTAMPS):
         check_internet_and_record()
         
         # Adjust the time for the end of the day reporting
-        current_hour = int(time.strftime('%M'))
+        current_hour = int(time.strftime('%H'))
         if PING_RESULTS[-1] > 100:
             send_report() 
             # if uptime.log exists, append data to it
@@ -77,7 +77,7 @@ def main(PING_RESULTS, TIMESTAMPS):
                 for i in range(len(TIMESTAMPS)):
                     f.write(TIMESTAMPS[i] + ',' + str(PING_RESULTS[i]) + '\n')
 
-        elif current_hour == 59:   # Send report around 11 PM or when ping is too high
+        elif current_hour == 23:   # Send report around 11 PM or when ping is too high
             send_report() 
             # if uptime.log exists, append data to it
             with open(f'uptime_{TODAY}.log', 'a') as f:
@@ -86,7 +86,7 @@ def main(PING_RESULTS, TIMESTAMPS):
             PING_RESULTS = []  # Reset data for the next day
             TIMESTAMPS = [] 
 
-        time.sleep(30)  # Wait for 5 minutes
+        time.sleep(300)  # Wait for 5 minutes
         emailscanner(PING_RESULTS, TIMESTAMPS)
 
 # Start main loop
