@@ -1,0 +1,15 @@
+
+{
+  "mail": {
+    "server": "smtp.gmail.com",
+    "port": 587,
+    "sender": "Your Email",
+    "password": "Your Password",
+    "recipient": "Your Target Email"
+  },
+  "usage": {
+    "minutesOrHours": "H",
+    "time": 23,
+    "targethost": "1.1.1.1"
+  }
+}
