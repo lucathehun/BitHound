@@ -1,0 +1,15 @@
+
+{
+  "mail": {
+    "server": "smtp.gmail.com",
+    "port": 587,
+    "sender": "luca.gatty@gmail.com",
+    "password": "numk luyl phpm znyg",
+    "recipient": "uptime.loging@gmail.com"
+  },
+  "usage": {
+    "minutesOrHours": "H",
+    "time": 23,
+    "targethost": "1.1.1.1"
+  }
+}
