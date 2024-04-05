@@ -1,7 +1,7 @@
 main.py
-settinsgs.json
 .DS_Store
 connectivity_report.png
 uptime_*.log
 logs/
 __pycache__/
+settinsgs.json
