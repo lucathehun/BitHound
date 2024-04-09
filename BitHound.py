@@ -32,19 +32,10 @@ def check_internet_and_record():
 
     TIMESTAMPS.append(time.strftime('%H:%M'))
 
-# Extract hours only and keep minutes in the list
-    seen_hours = set()  # Use a set to store unique hours
-    HOURS = []
-    for timestamp in TIMESTAMPS:
-        hour = timestamp.split(':')[0]
-        if hour not in seen_hours:
-            HOURS.append(hour)
-            seen_hours.add(hour)
-
 def send_report():
     """Generates a plot and sends the email report."""
     plt.figure(figsize=(8, 4))  # Adjust figure size as needed
-    plt.plot(HOURS, PING_RESULTS)
+    plt.plot(TIMESTAMPS, PING_RESULTS)
     plt.xlabel('time')
     plt.ylabel('Ping (ms)')
     plt.title(f'Internet Connectivity Report - {TODAY}')
