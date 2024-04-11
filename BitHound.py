@@ -1,18 +1,24 @@
 
+import os
+import webbrowser
 import smtplib
 import time
+import imaplib
+import email
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
+from email.header import decode_header
 import ping3
 import matplotlib.pyplot as plt
 
 # Configuration
-SMTP_SERVER = 'smtp.gmail.com'  # Replace with your email provider's SMTP server
+MONITORING = True
+EMAIL_SERVER = 'smtp.gmail.com'  # Replace with your email provider's SMTP server
 SMTP_PORT = 587                 # May be 465 for SSL
-SENDER_EMAIL = 'your sender email'
-PASSWORD = 'your sender mail password' 
-RECIPIENT_EMAIL = 'your receiver email'
+SENDER_EMAIL = 'luca.gatty@gmail.com'
+PASSWORD = 'numk luyl phpm znyg' 
+RECIPIENT_EMAIL = 'uptime.loging@gmail.com'
 TARGET_HOST = 'www.google.com'  # Website or IP for ping test
 TODAY = time.strftime('%Y-%m-%d')
 
@@ -28,14 +34,20 @@ def check_internet_and_record():
     if result is not False:
         PING_RESULTS.append(result)
     else:
-        PING_RESULTS.append(None)  # Indicates connection issue
+        PING_RESULTS.append(0)  # Indicates connection issue
 
     TIMESTAMPS.append(time.strftime('%H:%M'))
 
 def send_report():
     """Generates a plot and sends the email report."""
+    hours = []
+    for i in range(len(TIMESTAMPS)):
+        if TIMESTAMPS[i].split(':')[0] not in hours:
+            hours.append(TIMESTAMPS[i].split(':')[0])
+        else:
+            hours.append(' ')
     plt.figure(figsize=(8, 4))  # Adjust figure size as needed
-    plt.plot(TIMESTAMPS, PING_RESULTS)
+    plt.plot(hours, PING_RESULTS)
     plt.xlabel('time')
     plt.ylabel('Ping (ms)')
     plt.title(f'Internet Connectivity Report - {TODAY}')
@@ -70,14 +82,7 @@ def main(PING_RESULTS, TIMESTAMPS):
         
         # Adjust the time for the end of the day reporting
         current_hour = int(time.strftime('%H'))
-        if PING_RESULTS[-1] > 100:
-            send_report() 
-            # if uptime.log exists, append data to it
-            with open(f'uptime_{TODAY}.log', 'a') as f:
-                for i in range(len(TIMESTAMPS)):
-                    f.write(TIMESTAMPS[i] + ',' + str(PING_RESULTS[i]) + '\n')
-
-        elif current_hour == 23:   # Send report around 11 PM or when ping is too high
+        if current_hour == 23:   # Send report around 11 PM or when ping is too high
             send_report() 
             # if uptime.log exists, append data to it
             with open(f'uptime_{TODAY}.log', 'a') as f:
