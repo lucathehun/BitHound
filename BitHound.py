@@ -16,8 +16,8 @@ import matplotlib.pyplot as plt
 MONITORING = True
 EMAIL_SERVER = 'smtp.gmail.com'  # Replace with your email provider's SMTP server
 SMTP_PORT = 587                 # May be 465 for SSL
-SENDER_EMAIL = 'luca.gatty@gmail.com'
-PASSWORD = 'numk luyl phpm znyg' 
+SENDER_EMAIL = 'sender_email'
+PASSWORD = 'password' 
 RECIPIENT_EMAIL = 'uptime.loging@gmail.com'
 TARGET_HOST = 'www.google.com'  # Website or IP for ping test
 TODAY = time.strftime('%Y-%m-%d')
